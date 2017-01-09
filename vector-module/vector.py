@@ -1,3 +1,5 @@
+from math import sqrt
+
 class Vector(object):
     def __init__(self, coordinates):
         try:
@@ -24,9 +26,19 @@ class Vector(object):
         multiplied_coordinates = map(lambda x: x*c, self.coordinates)
         return Vector(multiplied_coordinates)
 
+    def magnitude(self):
+        vectorsquare = map(lambda x: x**2, self.coordinates)
+        return sqrt(sum(vectorsquare))
+
+    def normalise(self):
+        norm = Vector.magnitude(self)
+        return Vector.scalarmultiplication(self, 1/norm)
+
     def __str__(self):
         return 'Vector: {}'.format(self.coordinates)
 
-
     def __eq__(self, v):
         return self.coordinates == v.coordinates
+
+my_vector = Vector([1.996,3.108,-4.554])
+print my_vector.normalise()
