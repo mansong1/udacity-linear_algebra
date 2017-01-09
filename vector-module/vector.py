@@ -31,14 +31,15 @@ class Vector(object):
         return sqrt(sum(vectorsquare))
 
     def normalise(self):
-        norm = Vector.magnitude(self)
-        return Vector.scalarmultiplication(self, 1/norm)
+        try:
+            magnitude = self.magnitude()
+            return self.scalarmultiplication(1/magnitude)
+
+        except ZeroDivisionError:
+            raise Exception('Cannot normalise the zero vector')
 
     def __str__(self):
         return 'Vector: {}'.format(self.coordinates)
 
     def __eq__(self, v):
         return self.coordinates == v.coordinates
-
-my_vector = Vector([1.996,3.108,-4.554])
-print my_vector.normalise()
