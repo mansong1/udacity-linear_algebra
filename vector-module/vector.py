@@ -39,9 +39,11 @@ class Vector(object):
             raise Exception('Cannot normalise the zero vector')
 
     def dotproduct(self, v):
-        try:
-            dot_prod = [ sum(x+y) for x,y in zip(self.coordinates, v.coordinates)
+        dot_prod = sum([ x*y for x,y in zip(self.coordinates, v.coordinates)])
+        return dot_prod
 
+    def angle(self, v):
+        self.dotproduct(v)/(self.magnitude() * v.magnitude())
 
     def __str__(self):
         return 'Vector: {}'.format(self.coordinates)
